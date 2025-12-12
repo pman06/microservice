@@ -1,0 +1,10 @@
+fileignoreconfig:
+  - filename: account-service/app/utils/password_hash.py
+    checksum: b33ca88b1450d10c19f74aedfdeec78d8fbc207547108f4c69a7d5ccf25661f5
+  - filename: account-service/app/config.py
+    checksum: 42db72385fc91aeda4b4ee4d9e9d879d64c360241f43298a8c2afbcc743cc103
+  - filename: account-service/app/services/auth_service.py
+    checksum: e2eb48bf12e7f96495e7f53f1950b5401415dfe677bc2f76cb7d061c78f25a4e
+  - filename: account-service/app/models/user.py
+    checksum: 3a3da44ad434c6ddb4c668a2b0f73f3a18eaeae4fd3bb00ddb4e322102e8fc1f
+version: "1.0"
