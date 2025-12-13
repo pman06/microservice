@@ -1,4 +1,5 @@
 from app.database import db
+import datetime
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -7,6 +8,8 @@ class User(db.Model):
     first_name = db.Column(db.String(50), nullable=True)
     last_name = db.Column(db.String(50), nullable=True)
     age = db.Column(db.Integer, nullable=True)
+    refresh_tokens = db.relationship('RefreshToken',  backref='user', lazy='dynamic')
+    created = db.Column(db.DateTime, default=datetime.datetime.now(datetime.timezone.utc))
 
     def __repr__(self):
         return f"Name : {self.first_name}, Age: {self.age}"
