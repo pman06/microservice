@@ -17,4 +17,10 @@ fileignoreconfig:
     checksum: b7aebc221dad0206c0b9fce0b1c8de4c2cd6e9e9bea4b388cda47f7efa87fd3f
   - filename: account-service/app/utils/refresh_token.py
     checksum: f9595bd175b6343c87588561502d686a467f54adcb2767950180b5a3d0b522cd
+  - filename: account-service/migrations/versions/cc2a660640a9_fixed_cascading_error.py
+    checksum: 8fb8c736fc8465a3a96a59d97a59178f0ac4b39cdc1f8a55d7dc5879c5570f01
+  - filename: account-service/app/models/refresh_token.py
+    checksum: 650d105ab2eb7c979b82824bbcd5c9a7167233e9921d1272e4e28b2080f90b88
+  - filename: account-service/app/models/refresh_token.py
+    checksum: 650d105ab2eb7c979b82824bbcd5c9a7167233e9921d1272e4e28b2080f90b88
 version: "1.0"

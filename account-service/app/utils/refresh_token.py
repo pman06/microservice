@@ -14,7 +14,7 @@ def create_refresh_token_for_user(user, days=30):
     h = hash_token(raw)
     now = datetime.datetime.now(datetime.timezone.utc)
     expires = now + datetime.timedelta(days=days)
-    rt = RefreshToken(user.id, token_hash=h, issued_at=now, expires_at=expires)
+    rt = RefreshToken(user_id=user.id, token_hash=h, issued_at=now, expires_at=expires)
     db.session.add(rt)
     db.session.commit()
     return raw
@@ -38,13 +38,14 @@ def verify_and_rotate_refresh_token(raw_token, rotate=True, days=30):
     rt = RefreshToken.query.filter_by(token_hash=h, revoked=False).first()
     if not rt:
         return None, None
-    now = datetime.datetime.now(datetime.timezone.utc)
+    now = datetime.datetime.now()
 
     if rt.expires_at < now:
         # mark as revoked/expired
         rt.revoked =True
         db.session.commit()
         return None, None
+    
     user = rt.user
 
     if rotate:
@@ -54,7 +55,7 @@ def verify_and_rotate_refresh_token(raw_token, rotate=True, days=30):
         new_hash = hash_token(new_raw)
         expires = now + datetime.timedelta(days=days)
         new_rt = RefreshToken(user_id=user.id, token_hash=new_hash, issued_at=now, expires_at=expires)
-        db.session.add(rt)
+        db.session.add(new_rt)
         db.session.commit()
         return (user, new_raw)
     else:

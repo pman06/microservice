@@ -8,7 +8,7 @@ class User(db.Model):
     first_name = db.Column(db.String(50), nullable=True)
     last_name = db.Column(db.String(50), nullable=True)
     age = db.Column(db.Integer, nullable=True)
-    refresh_tokens = db.relationship('RefreshToken',  backref='user', lazy='dynamic')
+    refresh_tokens = db.relationship('RefreshToken',  backref='user', lazy='dynamic', cascade='all, delete')
     created = db.Column(db.DateTime, default=datetime.datetime.now(datetime.timezone.utc))
 
     def __repr__(self):
@@ -19,3 +19,6 @@ class User(db.Model):
     
     def get_last_name(self):
         return self.last_name
+    
+    def get_email(self):
+        return self.email
