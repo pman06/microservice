@@ -1,6 +1,7 @@
 from flask import Flask
 from .database import db, migrate
 from .routes.auth_routes import auth_bp
+from .routes.admin_routes import admin_bp
 
 def create_app():
     app = Flask(__name__)
@@ -12,5 +13,6 @@ def create_app():
     migrate.init_app(app, db)
 
     app.register_blueprint(auth_bp, url_prefix='/auth')
+    app.register_blueprint(admin_bp, url_prefix="/admin")
     
     return app
