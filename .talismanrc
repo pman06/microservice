@@ -9,8 +9,6 @@ fileignoreconfig:
     checksum: 3a3da44ad434c6ddb4c668a2b0f73f3a18eaeae4fd3bb00ddb4e322102e8fc1f
   - filename: account-service/migrations/env.py
     checksum: 1dea6929d143beefa719964abc1f34e9f48287e0193fb03ce6174e8ce9331c11
-  - filename: account-service/app/models/refresh_token.py
-    checksum: 37908e7b0f1cd220198414c5352eae20afe8609af95a69acb73d28ae7bf639ea
   - filename: account-service/migrations/versions/45b9c54d3aac_adding_user_schema_to_project.py
     checksum: 87d809a73d11a08ffeb18fa6c228e98836b67bbc834ea5a2c3736de45c15139c
   - filename: account-service/migrations/alembic.ini
@@ -19,8 +17,8 @@ fileignoreconfig:
     checksum: f9595bd175b6343c87588561502d686a467f54adcb2767950180b5a3d0b522cd
   - filename: account-service/migrations/versions/cc2a660640a9_fixed_cascading_error.py
     checksum: 8fb8c736fc8465a3a96a59d97a59178f0ac4b39cdc1f8a55d7dc5879c5570f01
+  - filename: account-service/migrations/versions/b43c763c7802_initial_migration.py
+    checksum: 0c9388388d5da0b8d9ba8b519a6e94a21348868127ddd9b5e44b94e38415e456
   - filename: account-service/app/models/refresh_token.py
-    checksum: 650d105ab2eb7c979b82824bbcd5c9a7167233e9921d1272e4e28b2080f90b88
-  - filename: account-service/app/models/refresh_token.py
-    checksum: 650d105ab2eb7c979b82824bbcd5c9a7167233e9921d1272e4e28b2080f90b88
+    checksum: 7e3c855c59742723d5aaa22bf9de83094a7a39026f4afe4aea47c180eed5cbff
 version: "1.0"

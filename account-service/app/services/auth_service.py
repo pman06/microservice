@@ -16,7 +16,7 @@ def register(email, password):
     db.session.commit()
 
     # create user tokens
-    access = generate_token(user.id)
+    access = generate_token(user.id, user.role)
     refresh_raw = create_refresh_token_for_user(user)
     return  {'message': 'User created successfully', 'user': user, 'access_token':access, 'refresh_token': refresh_raw } 
 
@@ -24,7 +24,7 @@ def login(email, password):
     user = User.query.filter_by(email=email).first()
     if not user or not verify_password(password, user.password):
         return None
-    access = generate_token(user.id)
+    access = generate_token(user.id, user.role)
     refresh_raw = create_refresh_token_for_user(user)
     return {"user": user, "access_token": access, "refresh_token": refresh_raw}
 

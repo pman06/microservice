@@ -30,7 +30,7 @@ def revoke_refresh_token(raw_token):
 
 def verify_and_rotate_refresh_token(raw_token, rotate=True, days=30):
     """
-    Verify toekn exists not expired and not revoked
+    Verify token exists not expired and not revoked
     If rotate=True: revoke old and insert new
     Returns (user, new_raw_token) or (None, None)
     """

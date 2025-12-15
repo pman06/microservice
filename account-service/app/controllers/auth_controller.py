@@ -27,14 +27,14 @@ def refresh_controller():
     data = request.get_json(silent=True) or {}
     raw = data.get('refresh_token') or request.cookies.get('refresh_token')
     if not raw:
-        return jsonify({'error': ' no refresh token provided'}), 400
+        return jsonify({'error': 'no refresh token provided'}), 400
     
     user, new_raw = verify_and_rotate_refresh_token(raw)
 
     if not user:
         return jsonify({'error': 'Invalid or expired refresh token'}), 401
     
-    access = generate_token(user.id)
+    access = generate_token(user.id, user.role)
     resp ={'access_token': access}
     if new_raw:
         resp['refresh_token'] = new_raw
