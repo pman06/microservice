@@ -21,4 +21,8 @@ fileignoreconfig:
     checksum: 0c9388388d5da0b8d9ba8b519a6e94a21348868127ddd9b5e44b94e38415e456
   - filename: account-service/app/models/refresh_token.py
     checksum: 7e3c855c59742723d5aaa22bf9de83094a7a39026f4afe4aea47c180eed5cbff
+  - filename: account-service/app/utils/jwt_handler.py
+    checksum: 71639887fc12cfd67865c3a0f868aafdce6f7f9140a5dfa37fec7bb26346a7b1
+  - filename: account-service/tests/configtest.py
+    checksum: 2abe00a3fb4368ef4a7cc4cd64008e041cecaa09f11f0cb49f85e048b2255fe9
 version: "1.0"
