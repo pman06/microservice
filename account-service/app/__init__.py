@@ -3,10 +3,14 @@ from .database import db, migrate
 from .routes.auth_routes import auth_bp
 from .routes.admin_routes import admin_bp
 
-def create_app():
+def create_app(config_override=None):
     app = Flask(__name__)
 
-    app.config.from_object('app.config.Config')
+    if config_override is not None:
+        app.config.update(config_override)
+
+    else:
+        app.config.from_object('app.config.Config')
 
     db.init_app(app)
 

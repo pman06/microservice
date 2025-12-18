@@ -19,8 +19,8 @@ def login_controller():
     data = request.get_json()
     token = login(data['email'], data['password'])
     if not token:
-        return jsonify({'error': 'Invalid credentials'})
-    return jsonify({'user': token['user'].get_email(), 'access_token': token['access_token'], 'refresh_token': token['refresh_token']})
+        return jsonify({'error': 'Invalid credentials'}), 401
+    return jsonify({'user': token['user'].get_email(), 'access_token': token['access_token'], 'refresh_token': token['refresh_token']}), 200
 
 
 def refresh_controller():
@@ -38,7 +38,7 @@ def refresh_controller():
     resp ={'access_token': access}
     if new_raw:
         resp['refresh_token'] = new_raw
-    return jsonify(resp)
+    return jsonify(resp), 200
 
 def logout_controller():
     data = request.get_json(silent=True) or {}

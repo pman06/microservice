@@ -10,14 +10,19 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")
 
 @pytest.fixture
 def app():
-    app = create_app()
-    app.config.update(
-        {
-            "TESTING": True,
-            "SQLALCHEMY_DATABASE_URI": "sqlite:///:memory:",
-            "JWT_SECRET": "test-secret"
-        }
-    )
+    config = {
+        "TESTING": True,
+        "SQLALCHEMY_DATABASE_URI": "sqlite:///:memory:",
+        "SQLALCHEMY_TRACK_MODIFICATIONS": False,
+        "JWT_SECRET": "test-secret"
+    }
+
+    app = create_app(config)
+
+
+    assert app.config['TESTING'] == True
+    assert 'sqlite:///:memory:' in app.config['SQLALCHEMY_DATABASE_URI']
+    assert "sqlite" in app.config["SQLALCHEMY_DATABASE_URI"]
 
     with app.app_context():
         db.create_all()
@@ -31,7 +36,7 @@ def client(app):
 @pytest.fixture
 def user(app):
     u = User(
-         email="user@test.com",
+        email="user@test.com",
         password=hash_password("password"),
         role="user"
     )
