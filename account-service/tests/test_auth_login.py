@@ -29,3 +29,9 @@ def test_login_nonexistence_user(client, user):
 
     assert res.status_code == 401
     assert res.get_json()["error"] == "Invalid credentials"  
+
+def test_login_no_data(client, user):
+    res = client.post("/auth/login", json=None)
+
+    assert res.status_code == 400
+    assert res.get_json()["error"] == "No data provided"

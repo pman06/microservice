@@ -16,7 +16,13 @@ def signup_controller():
                     'refresh_token': response['refresh_token']}), 201
 
 def login_controller():
-    data = request.get_json()
+    data = request.get_json(silent=True)
+    if not data:
+        return jsonify({'error': 'No data provided'}), 400
+    
+    if 'email' not in data or 'password' not in data:
+        return jsonify({'error': 'Email and password are required'}), 400
+    
     token = login(data['email'], data['password'])
     if not token:
         return jsonify({'error': 'Invalid credentials'}), 401
