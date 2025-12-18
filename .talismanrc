@@ -25,4 +25,6 @@ fileignoreconfig:
     checksum: 71639887fc12cfd67865c3a0f868aafdce6f7f9140a5dfa37fec7bb26346a7b1
   - filename: account-service/tests/configtest.py
     checksum: 2abe00a3fb4368ef4a7cc4cd64008e041cecaa09f11f0cb49f85e048b2255fe9
+  - filename: tests/*
+    checksum: a7c0d6a315dff7eb6925edabe6e49210ecf4e3ced85027ebd1f951806d696f35
 version: "1.0"

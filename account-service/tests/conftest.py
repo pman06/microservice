@@ -3,8 +3,12 @@ from app import create_app
 from app.database import db
 from app.models.user import User
 from app.utils.password_hash import hash_password
+import sys
+import os
 
-@pytest_fixture
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
+
+@pytest.fixture
 def app():
     app = create_app()
     app.config.update(
@@ -15,16 +19,16 @@ def app():
         }
     )
 
-    with app.context():
+    with app.app_context():
         db.create_all()
         yield app
         db.drop_all()
 
-@pytest_fixture
+@pytest.fixture
 def client(app):
     return app.test_client()
 
-@pytyest_fixture
+@pytest.fixture
 def user(app):
     u = User(
          email="user@test.com",
@@ -35,7 +39,7 @@ def user(app):
     db.session.commit()
     return u
 
-@pytest_fixture
+@pytest.fixture
 def admin(app):
     u = user(
         email="admin@test.com",
