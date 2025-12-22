@@ -6,8 +6,9 @@ def test_login_success(client, user):
         "password": "password"
     })
 
+    print(res.get_json())
     assert res.status_code == 200
-    assert res.get_json()["user"]["email"] == user.email
+    assert res.get_json()["user"] == user.get_email()
     data = res.get_json()
     assert "access_token" in data
     assert "refresh_token" in data

@@ -8,7 +8,7 @@ def login(client):
 
 def test_refresh_token_rotation(client, user):
     tokens = login(client)
-    refresh = tokens["refresh_token"]
+    refresh = tokens.get_json()["refresh_token"]
 
     res = client.post("/auth/refresh", json={
         "refresh_token": refresh
