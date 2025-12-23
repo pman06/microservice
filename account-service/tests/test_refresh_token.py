@@ -36,3 +36,9 @@ def test_refresh_with_revoked_token(client, user):
     data = res.get_json()
     assert res.status_code == 401
     assert data["error"] == "Invalid or expired refresh token"
+
+def test_empty_token_refresh(client, user):
+    res = client.post("/auth/login", json={})
+
+    assert res.status_code == 400
+    assert res.get_json()["error"] == "No data provided"
