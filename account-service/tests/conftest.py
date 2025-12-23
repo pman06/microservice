@@ -19,7 +19,6 @@ def app():
 
     app = create_app(config)
 
-
     assert app.config['TESTING'] == True
     assert 'sqlite:///:memory:' in app.config['SQLALCHEMY_DATABASE_URI']
     assert "sqlite" in app.config["SQLALCHEMY_DATABASE_URI"]
