@@ -45,7 +45,7 @@ def user(app):
 
 @pytest.fixture
 def admin(app):
-    u = user(
+    u = User(
         email="admin@test.com",
         password=hash_password("password"),
         role="admin"
