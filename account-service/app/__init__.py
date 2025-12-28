@@ -17,6 +17,6 @@ def create_app(config_override=None):
     migrate.init_app(app, db)
 
     app.register_blueprint(auth_bp, url_prefix='/auth')
-    app.register_blueprint(admin_bp, url_prefix="/admin")
+    app.register_blueprint(admin_bp, url_prefix='/admin')
     
     return app
