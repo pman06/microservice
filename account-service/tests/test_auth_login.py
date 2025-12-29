@@ -36,3 +36,10 @@ def test_login_no_data(client):
 
     assert res.status_code == 400
     assert res.get_json()["error"] == "No data provided"
+
+def test_login_missing_fields(client):
+    res = client.post("/auth/login", json={
+        "email": "user@test.com"})
+    
+    assert res.status_code == 400
+    assert res.get_json()["error"] == "Email and password are required"

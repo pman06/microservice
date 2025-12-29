@@ -21,7 +21,7 @@ def create_refresh_token_for_user(user, days=30):
 
 def revoke_refresh_token(raw_token):
     h = hash_token(raw_token)
-    rt = RefreshToken.query.filter_by(token_hash=h, revoked=False).first()
+    rt = db.session.query(RefreshToken).filter_by(token_hash=h, revoked=False).first()
     if not rt:
         return None
     rt.revoked = True
@@ -35,7 +35,7 @@ def verify_and_rotate_refresh_token(raw_token, rotate=True, days=30):
     Returns (user, new_raw_token) or (None, None)
     """
     h = hash_token(raw_token)
-    rt = RefreshToken.query.filter_by(token_hash=h, revoked=False).first()
+    rt = db.session.query(RefreshToken).filter_by(token_hash=h, revoked=False).first()
     if not rt:
         return None, None
     now = datetime.datetime.now()

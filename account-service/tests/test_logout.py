@@ -1,4 +1,4 @@
-def test_revokes_refresh_toekn(client, user):
+def test_logout_revokes_refresh_toekn(client, user):
     token = client.post("/auth/login", json={
         "email": "user@test.com",
         "password": "password"
@@ -12,3 +12,4 @@ def test_revokes_refresh_toekn(client, user):
 
     assert res.status_code == 200
     assert res.get_json()["status"] == "ok"
+    
