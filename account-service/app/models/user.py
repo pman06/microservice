@@ -14,9 +14,12 @@ class User(db.Model):
     created = db.Column(db.DateTime, default=datetime.datetime.now(datetime.timezone.utc))
     # adding roles to Db
     role = db.Column(db.String(20), nullable=False, default='user', server_default='user')
+    
+    # Adding email verification
+    email_verified = db.Column(db.Boolean, default=False, nullable=False, server_default='false')
 
     def __repr__(self):
-        return f"Name : {self.first_name}, Age: {self.age}"
+        return f"{self.first_name} {self.last_name} {self.email}"
     
     def is_admin(self):
         return self.role == 'admin'
@@ -29,3 +32,4 @@ class User(db.Model):
     
     def get_email(self):
         return self.email
+    
