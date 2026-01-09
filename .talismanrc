@@ -31,4 +31,10 @@ fileignoreconfig:
       - "filecontent"
   - filename: account-service/tests/conftest.py
     checksum: bc795c79bee24abbd199eec9c3855905d4063396e12c646469c79a47aae2db03
+  - filename: account-service/app/utils/email_verification.py
+    checksum: 3d3a16704194371eddea039fec6ed0ef30a58236b2a0a063f956ee95985416b9
+  - filename: account-service/app/models/email_verification.py
+    checksum: 5f99a38d0a2ccfc3011c6d033e4501ae5416e6360d03f4934403fb1ef54c976f
+  - filename: account-service/migrations/versions/77da9a0d5661_email_verification.py
+    checksum: fc8e4451ee1a28d919585e33932decebaf0564f64642584cd8195b3264a64218
 version: "1.0"

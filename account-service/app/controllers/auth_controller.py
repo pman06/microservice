@@ -2,18 +2,20 @@ from flask import request, jsonify
 from app.utils.jwt_handler import generate_token
 from app.services.auth_service import register, login
 from app.utils.refresh_token import verify_and_rotate_refresh_token, revoke_refresh_token
+from app.utils.email_verification import verify_email_token
 
 def signup_controller():
     data = request.get_json()
     response = register(data['email'], data['password'])
-    print(response)
+
     if response['message'] == 'Error: Username already taken':
         return jsonify({'error': 'Email already registered'}), 409
     
     return jsonify({'message': response['message'], 
                     'email': response['user'].get_email(), 
                     'access_token': response['access_token'],
-                    'refresh_token': response['refresh_token']}), 201
+                    'refresh_token': response['refresh_token'],
+                    'verify_link': response['verify_link']}), 201
 
 def login_controller():
     data = request.get_json(silent=True)
@@ -22,10 +24,16 @@ def login_controller():
     
     if 'email' not in data or 'password' not in data:
         return jsonify({'error': 'Email and password are required'}), 400
+    try:
+        token = login(data['email'], data['password'])
+    except ValueError as e:
+        return jsonify({"error": str(e)}), 403
     
-    token = login(data['email'], data['password'])
     if not token:
         return jsonify({'error': 'Invalid credentials'}), 401
+    if 'error' in token:
+        return jsonify({'error': token['error'], "token": token['token']}), 403
+    
     return jsonify({'user': token['user'].get_email(), 'access_token': token['access_token'], 'refresh_token': token['refresh_token']}), 200
 
 
@@ -57,3 +65,28 @@ def logout_controller():
         return jsonify({'status': 'ok'}), 200
     
     return jsonify({'error': 'token not found'}), 400
+
+def verify_email_controller():
+    token = request.args.get('token')
+
+    if not token:
+        return jsonify({
+            "error": "Missing Token"
+        }), 400
+    
+    _, status = verify_email_token(token)
+
+    if status == "verified":
+        return jsonify({"message": "Email verified successfully"}), 200
+    
+    if status == "resent":
+        return jsonify({
+            "message": "Verification link expired. A new email has been sent."
+        }), 200
+
+    if status == "resend_limit":
+        return jsonify({
+            "error": "Too many verification attempts. Please contact support."
+        }), 429
+
+    return jsonify({"error": "Invalid or expired token"}), 400
