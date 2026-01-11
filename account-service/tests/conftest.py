@@ -37,7 +37,8 @@ def user(app):
     u = User(
         email="user@test.com",
         password=hash_password("password"),
-        role="user"
+        role="user",
+        email_verified=True
     )
     db.session.add(u)
     db.session.commit()
@@ -48,7 +49,8 @@ def admin(app):
     u = User(
         email="admin@test.com",
         password=hash_password("password"),
-        role="admin"
+        role="admin",
+        email_verified=True
     )
 
     db.session.add(u)
