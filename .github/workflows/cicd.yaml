@@ -13,9 +13,12 @@ on:
       - main
       - feature/*
 
+defaults:
+  run:
+    working-directory: ./account-service
+
 jobs:
   ci_build_test:
-    working-directory: ./account-service
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
