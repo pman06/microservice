@@ -1,13 +1,14 @@
 name: Account Services Pipeline
+run-name: Account Services Pipeline - ${{ github.run_id }} by ${{ github.actor }}
 
 on:
   push:
     branches:
       - main
       - feature/*
-    files:
+    paths:
       - "account-service/**"
-  pull_requests:
+  pull_request:
     branches:
       - main
       - feature/*
