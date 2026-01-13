@@ -1,5 +1,5 @@
 name: Account Services Pipeline
-run-name: Account Services Pipeline - ${{ github.run_id }} by ${{ github.actor }}
+run-name: ${{ github.workflow}}- ${{ github.run_id }} by ${{ github.actor }}
 
 on:
   push:
@@ -40,7 +40,6 @@ jobs:
 
   deploy_dev:
     needs: ci_build_test
-    working-directory: ./account-service
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'
     steps:
