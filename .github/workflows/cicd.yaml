@@ -8,6 +8,7 @@ on:
       - feature/*
     paths:
       - "account-service/**"
+      - ".github/workflows/cicd.yaml"
   pull_request:
     branches:
       - main
