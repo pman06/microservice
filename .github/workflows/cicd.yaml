@@ -35,7 +35,7 @@ jobs:
           pip install -r requirements.txt
           pip install pylint
 
-      - run: pwd
+      - run: ls -a
 
       - name: Analysing the code with pylint
         run: |
@@ -45,13 +45,15 @@ jobs:
         run: |
           python -m pytest
 
-      - name: Docker build and test
+      - run: ls -a
+
+      - name: Docker buil
         run: |
           docker build -t account-service-test .
-          docker run --rm account-service-test python -m pytest
 
       - name: smoke test
         run: |
+          docker run --rm account-service-test python -m pytest  
           sleep 10
           curl -f http://localhost:5000/health || exit 1
           docker-compose down
