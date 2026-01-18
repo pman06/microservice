@@ -53,7 +53,8 @@ jobs:
 
       - name: build secrets
         run: |
-          echo ${{ secrets.ENVDB }} 
+          # echo secrets: ${{ secrets.ENVDB }} 
+          env
           echo ${{ secrets.ENV }} > .env.db
           echo ${{ secrets.ENVDB }} > .env.db
 
