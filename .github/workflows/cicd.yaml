@@ -51,6 +51,12 @@ jobs:
         run: |
           docker build -t account-service-test .
 
+      - name: build secrets
+        run: |
+          echo ${{ secrets.ENVDB }} 
+          echo ${{ secrets.ENV }} > .env.db
+          echo ${{ secrets.ENVDB }} > .env.db
+
       - name: smoke test
         run: |
           docker run -d -p 5000:5000 --name account-service-test-container account-service-test
