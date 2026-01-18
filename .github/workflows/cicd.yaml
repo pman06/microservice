@@ -47,16 +47,18 @@ jobs:
 
       - run: ls -a
 
-      - name: Docker buil
+      - name: Docker build
         run: |
           docker build -t account-service-test .
 
       - name: build secrets
         run: |
-          # echo secrets: ${{ secrets.ENVDB }} 
+          echo "Creating env files for docker compose"
           env
-          echo ${{ secrets.ENV }} > .env.db
-          echo ${{ secrets.ENVDB }} > .env.db
+          ls -a
+          echo ${{ secrets.ENV }} >> .env
+          echo ${{ secrets.ENVDB }} >> .env.db
+          ls -a
 
       - name: smoke test
         run: |

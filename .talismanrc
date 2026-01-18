@@ -40,5 +40,5 @@ fileignoreconfig:
   - filename: account-service/app/models/password_reset.py
     checksum: 69104ed3ffa3de264774e90b29fcbf8c2cbf9490a5f188b73e0b55d50aeeb3d9
   - filename: .github/workflows/cicd.yaml
-    checksum: 54d2d785df6630ad14a56b928264e0d5c067c10f14c10cc332e71d64211d097c
+    checksum: 43b93562f2cfd23711661865c36283c93c77965dc55485858691707e562a993e
 version: "1.0"
