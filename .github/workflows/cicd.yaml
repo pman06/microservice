@@ -53,7 +53,7 @@ jobs:
 
       - name: smoke test
         run: |
-          docker run account-service-test -d -p 5000:5000 --name account-service-test-container
+          docker run -d -p 5000:5000 --name account-service-test-container account-service-test
           sleep 10
           curl -f -w "%{http_code}" http://localhost:5000/health/ -w "%{http_code}" || exit 1
           docker-compose down
