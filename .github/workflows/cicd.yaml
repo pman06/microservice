@@ -61,10 +61,16 @@ jobs:
           ls -a
 
       - name: smoke test
+        id: smoke_test
         run: |
           docker-compose up -d
           sleep 10
           curl -f -w "%{http_code}" http://localhost:5000/health/ -w "%{http_code}" || exit 1
+          docker-compose down
+
+      - name: always Docker compose down
+        if: steps.smoke_test.outcome == 'failure'
+        run: |
           docker-compose down
 
       - uses: atos-actions/clean-self-hosted-runner@v1
