@@ -67,6 +67,9 @@ jobs:
           curl -f -w "%{http_code}" http://localhost:5000/health/ -w "%{http_code}" || exit 1
           docker-compose down
 
+      - uses: atos-actions/clean-self-hosted-runner@v1
+        if: ${{ always() }} # Run even if previous steps in the job fail or are canceled
+
   deploy_dev:
     needs: ci_build_test
     runs-on: self-hosted
@@ -76,3 +79,5 @@ jobs:
       - name: deploying to dev
         run: |
           echo "Deploying to development environment"
+      - uses: atos-actions/clean-self-hosted-runner@v1
+        if: ${{ always() }} # Run even if previous steps in the job fail or are canceled
