@@ -35,17 +35,13 @@ jobs:
           pip install -r requirements.txt
           pip install pylint
 
-      - run: ls -a
-
       - name: Analysing the code with pylint
         run: |
           pylint $(git ls-files '*.py') --exit-zero
 
       - name: Run tests
         run: |
-          python -m pytest
-
-      - run: ls -a
+          python -m pytest --cov=./ --cov-report=xml
 
       - name: Docker build
         run: |
@@ -58,20 +54,19 @@ jobs:
           echo "${{ secrets.ENV }}" >> .env
           echo "${{ secrets.ENVDB }}" >> .env.db
           echo "Env files created"
-          ls -a
 
       - name: smoke test
         id: smoke_test
         run: |
-          docker-compose up -d
+          docker compose up -d
           sleep 10
           curl -f -w "%{http_code}" http://localhost:5000/health/ -w "%{http_code}" || exit 1
-          docker-compose down
+          docker compose down
 
       - name: always Docker compose down
         if: steps.smoke_test.outcome == 'failure'
         run: |
-          docker-compose down
+          docker compose down
 
       - uses: atos-actions/clean-self-hosted-runner@v1
         if: ${{ always() }} # Run even if previous steps in the job fail or are canceled
