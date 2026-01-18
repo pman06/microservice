@@ -55,9 +55,9 @@ jobs:
         run: |
           echo "Creating env files for docker compose"
 
-          ls -a
           echo ${{ secrets.ENV }} >> .env
           echo ${{ secrets.ENVDB }} >> .env.db
+          echo "Env files created"
           ls -a
 
       - name: smoke test
