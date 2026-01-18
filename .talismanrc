@@ -37,4 +37,6 @@ fileignoreconfig:
     checksum: 5f99a38d0a2ccfc3011c6d033e4501ae5416e6360d03f4934403fb1ef54c976f
   - filename: account-service/migrations/versions/77da9a0d5661_email_verification.py
     checksum: fc8e4451ee1a28d919585e33932decebaf0564f64642584cd8195b3264a64218
+  - filename: account-service/app/models/password_reset.py
+    checksum: 69104ed3ffa3de264774e90b29fcbf8c2cbf9490a5f188b73e0b55d50aeeb3d9
 version: "1.0"
