@@ -55,8 +55,8 @@ jobs:
         run: |
           echo "Creating env files for docker compose"
 
-          echo ${{ secrets.ENV }} >> .env
-          echo ${{ secrets.ENVDB }} >> .env.db
+          echo "${{ secrets.ENV }}" >> .env
+          echo "${{ secrets.ENVDB }}" >> .env.db
           echo "Env files created"
           ls -a
 
